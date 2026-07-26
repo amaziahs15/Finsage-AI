@@ -204,8 +204,10 @@ When the user's question is about their own finances, invoices, receivables, bud
 
         if (!upstream.ok || !upstream.body) {
           const errText = await upstream.text().catch(() => "");
-          if (upstream.status === 429) return new Response("Rate limited", { status: 429 });
-          return new Response(`AI error: ${errText}`, { status: 500 });
+          console.error(`Gemini API error ${upstream.status}:`, errText);
+          if (upstream.status === 429) return new Response(`Rate limited by Gemini: ${errText}`, { status: 429 });
+          if (upstream.status === 401 || upstream.status === 403) return new Response(`Invalid or missing GEMINI_API_KEY (${upstream.status})`, { status: 500 });
+          return new Response(`AI error ${upstream.status}: ${errText}`, { status: 500 });
         }
 
         let fullText = "";
