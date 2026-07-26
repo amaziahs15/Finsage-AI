@@ -68,7 +68,7 @@ export const Route = createFileRoute("/api/tts")({
         const safeText = text.slice(0, 3000);
 
         // Gemini native TTS — returns base64-encoded raw PCM audio
-        const TTS_MODEL = "gemini-2.5-flash-preview-tts";
+        const TTS_MODEL = "gemini-2.0-flash-preview-tts";
         const res = await fetch(
           `https://generativelanguage.googleapis.com/v1beta/models/${TTS_MODEL}:generateContent`,
           {

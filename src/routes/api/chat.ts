@@ -196,7 +196,7 @@ When the user's question is about their own finances, invoices, receivables, bud
             Authorization: `Bearer ${apiKey}`,
           },
           body: JSON.stringify({
-            model: "gemini-2.5-flash",
+            model: "gemini-2.0-flash",
             messages,
             stream: true,
           }),
